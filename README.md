@@ -5,7 +5,7 @@ go-swaggerわからんので動かして試してみるよ
 
 # how to use
 
-##build app
+## build app
 
 go とgo-swaggerをインストールしたコンテナがビルドされます。
 ベースイメージが`node:12.7.0-alpine`なのに深い理由は無い。
