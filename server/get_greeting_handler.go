@@ -6,6 +6,6 @@ import (
 )
 
 func GetGreeting(p factory.GetGreetingParams) middleware.Responder {
-	payload := *p.Name
+	payload := "hello " + *p.Name
 	return factory.NewGetGreetingOK().WithPayload(payload)
 }
