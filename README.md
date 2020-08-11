@@ -5,29 +5,31 @@ go-swaggerわからんので動かして試してみるよ
 
 # how to use
 
-## build app
-
-go とgo-swaggerをインストールしたコンテナがビルドされます。
-ベースイメージが`node:12.7.0-alpine`なのに深い理由は無い。
-
-```
-dockder-compose build
-```
-
 ## use go-swagger
-go-swaggerを使う方法は、コンテナの中に入って`swagger`コマンドを使います。
+go-swaggerを任意の方法でインストールしてね。
+インストール方法は[こちら](https://goswagger.io/install.html)
 
 ```
-docker-compose run --rm app sh
 swagger version
 ```
 
 ## go-swagger command
 
+makeファイルにユーティリティを記載
+
 build source
 
 ```
-swagger generate server -a routemanagement -A routemanagement --exclude-main --strict-additional-properties -t server/gen f ./swagger/swagger.yaml
+cd server
+make generate server
+
+※初回はmakeコマンド使わずにexclude-mainオプション使わ無い方が良い
+swagger generate server -a factory -A factory --exclude-main -f ../swagger.yaml -t gen
+```
+
+run server
+```
+make run-dev
 ```
 
 詳しくは[技術ブログ](https://future-architect.github.io/articles/20200630/)を見てね

@@ -10,16 +10,16 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
-	"github.com/maitoprivate/go-swagger-test/server/gen/restapi/routemanagement"
+	"github.com/maitoprivate/go-swagger-test/server/gen/restapi/factory"
 )
 
-//go:generate swagger generate server --target ../../gen --name Routemanagement --spec ../../../swagger.yaml --api-package routemanagement --principal interface{} --exclude-main
+//go:generate swagger generate server --target ../../gen --name Factory --spec ../../../swagger.yaml --api-package factory
 
-func configureFlags(api *routemanagement.RoutemanagementAPI) {
+func configureFlags(api *factory.FactoryAPI) {
 	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
 }
 
-func configureAPI(api *routemanagement.RoutemanagementAPI) http.Handler {
+func configureAPI(api *factory.FactoryAPI) http.Handler {
 	// configure the api here
 	api.ServeError = errors.ServeError
 
@@ -29,17 +29,13 @@ func configureAPI(api *routemanagement.RoutemanagementAPI) http.Handler {
 	// Example:
 	// api.Logger = log.Printf
 
-	api.UseSwaggerUI()
-	// To continue using redoc as your UI, uncomment the following line
-	// api.UseRedoc()
-
 	api.JSONConsumer = runtime.JSONConsumer()
 
 	api.TxtProducer = runtime.TextProducer()
 
 	if api.GetGreetingHandler == nil {
-		api.GetGreetingHandler = routemanagement.GetGreetingHandlerFunc(func(params routemanagement.GetGreetingParams) middleware.Responder {
-			return middleware.NotImplemented("operation routemanagement.GetGreeting has not yet been implemented")
+		api.GetGreetingHandler = factory.GetGreetingHandlerFunc(func(params factory.GetGreetingParams) middleware.Responder {
+			return middleware.NotImplemented("operation factory.GetGreeting has not yet been implemented")
 		})
 	}
 
