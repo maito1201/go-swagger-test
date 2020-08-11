@@ -8,8 +8,8 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
-	"github.com/go-openapi/runtime/middleware"
 
+	"github.com/maitoprivate/go-swagger-test/server"
 	"github.com/maitoprivate/go-swagger-test/server/gen/restapi/factory"
 )
 
@@ -33,11 +33,7 @@ func configureAPI(api *factory.FactoryAPI) http.Handler {
 
 	api.TxtProducer = runtime.TextProducer()
 
-	if api.GetGreetingHandler == nil {
-		api.GetGreetingHandler = factory.GetGreetingHandlerFunc(func(params factory.GetGreetingParams) middleware.Responder {
-			return middleware.NotImplemented("operation factory.GetGreeting has not yet been implemented")
-		})
-	}
+	api.GetGreetingHandler = factory.GetGreetingHandlerFunc(server.GetGreeting)
 
 	api.PreServerShutdown = func() {}
 
